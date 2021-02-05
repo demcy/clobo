@@ -15,22 +15,22 @@ export default class Register extends React.Component {
     render() {
         return (
             <div className="container">
-                <h1>Hello {this.state.username}</h1>
+                <h1>Register form</h1>
                 <form onSubmit={this.mySubmitHandler}>
                     <div className="row">
                         <div className="col-25">
-                            <label htmlFor="fname">First Name</label>
+                            <label htmlFor="email">Email</label>
                         </div>
                         <div className="col-75">
-                            <input onChange={this.myChangeHandler} type="text" id="fname" name="firstname" placeholder="Your name.." />
+                            <input onChange={this.myChangeHandler} type="text" id="email" name="email" placeholder="Your email.." />
                         </div>
                     </div>
                     <div className="row">
                         <div className="col-25">
-                            <label htmlFor="lname">Last Name</label>
+                            <label htmlFor="password">Password</label>
                         </div>
                         <div className="col-75">
-                            <input type="text" id="lname" name="lastname" placeholder="Your last name.." />
+                            <input type="password" id="password" name="password" placeholder="Your password.." />
                         </div>
                     </div>
                     <div className="row">
