@@ -15,35 +15,29 @@ export default class Register extends React.Component {
     render() {
         return (
             <div className="container">
-                <form onSubmit={this.mySubmitHandler}>
                 <h1>Hello {this.state.username}</h1>
+                <form onSubmit={this.mySubmitHandler}>
                     <div className="row">
                         <div className="col-25">
                             <label htmlFor="fname">First Name</label>
                         </div>
                         <div className="col-75">
-                            <input onChange={this.myChangeHandler} type="text" id="fname" name="firstname" placeholder="Your name..">
-    </div>
+                            <input onChange={this.myChangeHandler} type="text" id="fname" name="firstname" placeholder="Your name.." />
                         </div>
-                        <div className="row">
-                            <div className="col-25">
-                                <label htmlFor="lname">Last Name</label>
-                            </div>
-                            <div className="col-75">
-                                <input type="text" id="lname" name="lastname" placeholder="Your last name..">
-    </div>
-                            </div>
-
-
-                            <div className="row">
-                                <input type="submit" value="Submit">
-  </div>
-  </form>
+                    </div>
+                    <div className="row">
+                        <div className="col-25">
+                            <label htmlFor="lname">Last Name</label>
                         </div>
-
-    
-    );
-  }
+                        <div className="col-75">
+                            <input type="text" id="lname" name="lastname" placeholder="Your last name.." />
+                        </div>
+                    </div>
+                    <div className="row">
+                        <input type="submit" value="Submit" />
+                    </div>
+                </form>
+            </div >
+        );
+    }
 }
-
-
