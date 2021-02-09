@@ -1,4 +1,7 @@
-body {margin:0;}
+body {
+  margin:0;
+  background-color:#A36437;
+}
 
 ul {
   list-style-type: none;
@@ -34,7 +37,7 @@ li a:hover:not(.active) {
 main {
   padding: 20px;
   margin-top: 30px;
-  background-color:#1abc9c;
+  /* background-color:#A36437; */
 }
 
 * {
