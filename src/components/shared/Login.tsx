@@ -10,9 +10,11 @@ export default class Login extends React.Component {
     async submitHandler(event: any){
         event.preventDefault();
         const data = await UserApi.login(this.state.email, this.state.password)
-        if(data === 'success'){
-            window.location.pathname = '/User'
-        }
+        console.log(data)
+        // if(data !== ''){
+        //     console.log(data)
+        //     window.location.pathname = '/User'
+        // }
     }
     emailHandler = (event: any) => {
         this.setState({ email: event.target.value });

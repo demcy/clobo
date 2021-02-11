@@ -47,7 +47,6 @@ export abstract class UserApi {
 
     static async login(email: string, password: string): Promise<string>{
         const url = '/login';
-        
         try{
             const response = await this.axios.post<string>(url, JSON.stringify({email, password}));
             console.log('get all response', response);
