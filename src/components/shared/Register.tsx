@@ -9,11 +9,10 @@ export default class Register extends React.Component {
     }
     async submitHandler(event: any){
         event.preventDefault();
-        //console.log(this.state.email)
-        // console.log(this.state.password)
-        
-        await UserApi.register(this.state.email, this.state.password)
-        console.log('data')
+        const data = await UserApi.register(this.state.email, this.state.password)
+        if(data === 'success'){
+            window.location.pathname = '/Login'
+        }
         
     }
     

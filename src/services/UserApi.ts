@@ -28,22 +28,37 @@ export abstract class UserApi {
         }
     }
 
-    static async register(email: string, password: string): Promise<IUser>{
+    static async register(email: string, password: string): Promise<string>{
         const url = '/register';
-        const D: IUser = {
-          email: 'email', password: 'password'
-        }
+        
         try{
-            const response = await this.axios.post<IUser>(url);
+            const response = await this.axios.post<string>(url, JSON.stringify({email, password}));
             console.log('get all response', response);
-            if (response.status === 200) {
-                return D;
+            if (response.status === 201) {
+                return response.data;
             }
-            return D;
+            return 'trying';
         }
         catch (error) {
             console.log('error', (error as Error).message);
-            return D;
+            return error;
+        }
+    }
+
+    static async login(email: string, password: string): Promise<string>{
+        const url = '/login';
+        
+        try{
+            const response = await this.axios.post<string>(url, JSON.stringify({email, password}));
+            console.log('get all response', response);
+            if (response.status === 200) {
+                return response.data;
+            }
+            return 'trying';
+        }
+        catch (error) {
+            console.log('error', (error as Error).message);
+            return error;
         }
     }
 

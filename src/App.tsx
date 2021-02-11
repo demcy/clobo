@@ -10,8 +10,10 @@ const GetPage = () => {
     if (route === '/Register') return <Register />;
     if (route === '/Login') return <Login />;
     if (route === '/User') return <User users = {[{email: 'la',password: 'lalal'}]}/>;
-    return <Register />;
+    return <Login />;
 }
+
+
 
 const App = () => (
     <>

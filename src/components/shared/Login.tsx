@@ -1,28 +1,40 @@
 import React from 'react';
+import { UserApi } from '../../services/UserApi';
 
 
 export default class Login extends React.Component {
     state = {
-        username: ''
+        email: '',
+        password: ''
     }
-    mySubmitHandler = (event: any) => {
+    async submitHandler(event: any){
         event.preventDefault();
-        alert("You are submitting " + this.state.username);
+        const data = await UserApi.login(this.state.email, this.state.password)
+        if(data === 'success'){
+            window.location.pathname = '/User'
+        }
     }
-    myChangeHandler = (event: any) => {
-        this.setState({ username: event.target.value });
+    emailHandler = (event: any) => {
+        this.setState({ email: event.target.value });
+        //console.log(this.state.email)
+        //console.log( event.target.value)
+    }
+    passHandler = (event: any) => {
+        this.setState({ password: event.target.value });
+        //console.log(this.state.password)
+        //console.log( event.target.value)
     }
     render() {
         return (
             <div className="container">
                 <h1>Login form</h1>
-                <form onSubmit={this.mySubmitHandler}>
+                <form onSubmit={this.submitHandler.bind(this)}>
                     <div className="row">
                         <div className="col-25">
                             <label htmlFor="email">Email</label>
                         </div>
                         <div className="col-75">
-                            <input onChange={this.myChangeHandler} type="text" id="email" name="email" placeholder="Your email.." />
+                            <input onChange={this.emailHandler} type="text" id="email" name="email" placeholder="Your email.." />
                         </div>
                     </div>
                     <div className="row">
@@ -30,7 +42,7 @@ export default class Login extends React.Component {
                             <label htmlFor="password">Password</label>
                         </div>
                         <div className="col-75">
-                            <input type="password" id="password" name="password" placeholder="Your password.." />
+                            <input onChange={this.passHandler} type="password" id="password" name="password" placeholder="Your password.." />
                         </div>
                     </div>
                     <div className="row">
