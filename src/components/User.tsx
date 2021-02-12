@@ -4,19 +4,23 @@ import { IUser } from "../domain/IUser"
 import { UserApi } from '../services/UserApi';
 
 interface IProps {
-    users: IUser[]
+    users?: IUser[],
+    
 }
 interface IState {
-    users: IUser[]
+    users: IUser[],
+    
 }
 
 export default class User extends React.Component<IProps> {
 
     state: IState = {
-        users: this.props.users
+        users: [],
+        
     }
 
     async componentDidMount() {
+        
         const data = await UserApi.getAll();
         console.log(data)
         this.setState({ users: data })

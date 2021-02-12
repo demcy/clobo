@@ -7,15 +7,20 @@ export abstract class UserApi {
             baseURL: 'http://localhost:4000',
             headers: {
                 common: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                    //'withCredentials': 'true'
                 }
             }
         }
     )
     static async getAll(): Promise<IUser[]> {
         const url = '/users';
+        //this.axios.defaults.headers.common = {'Authorization': 'Bearer ' + document.cookie.split('=')[1]} 
+        //this.axios.defaults.headers.common['Authorization'] = 'Bearer ' + document.cookie.split('=')[1]
+         //console.log(document.cookie.split('=')[1])
+        //console.log(this.axios.defaults.headers.common)
         try{
-            const response = await this.axios.get<IUser[]>(url);
+            const response = await this.axios.get<IUser[]>(url, {withCredentials:true});
             console.log('get all response', response);
             if (response.status === 200) {
                 return response.data;
@@ -30,7 +35,7 @@ export abstract class UserApi {
 
     static async register(email: string, password: string): Promise<string>{
         const url = '/register';
-        
+        this.axios.defaults.method = 'POST'
         try{
             const response = await this.axios.post<string>(url, JSON.stringify({email, password}));
             console.log('get all response', response);

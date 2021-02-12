@@ -1,6 +1,9 @@
 import React from 'react';
 import { UserApi } from '../../services/UserApi';
 
+// interface IProps {
+//     getToken: any
+// }
 
 export default class Login extends React.Component {
     state = {
@@ -9,11 +12,14 @@ export default class Login extends React.Component {
     }
     async submitHandler(event: any){
         event.preventDefault();
+        
         const data = await UserApi.login(this.state.email, this.state.password)
-        console.log(data)
+        // this.props.getToken(data)
+        document.cookie = 'token=' + data + ';SameSite=None; Secure'
+
+        window.location.pathname = '/User'
         // if(data !== ''){
-        //     console.log(data)
-        //     window.location.pathname = '/User'
+            
         // }
     }
     emailHandler = (event: any) => {
