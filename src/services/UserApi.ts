@@ -21,6 +21,7 @@ export abstract class UserApi {
         //console.log(this.axios.defaults.headers.common)
         try{
             const response = await this.axios.get<IUser[]>(url, {withCredentials:true});
+            
             console.log('get all response', response);
             if (response.status === 200) {
                 return response.data;
@@ -53,7 +54,7 @@ export abstract class UserApi {
     static async login(email: string, password: string): Promise<string>{
         const url = '/login';
         try{
-            const response = await this.axios.post<string>(url, JSON.stringify({email, password}));
+            const response = await this.axios.post<string>(url, JSON.stringify({email, password}), {withCredentials:true}); 
             console.log('get all response', response);
             if (response.status === 200) {
                 return response.data;

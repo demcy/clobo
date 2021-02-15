@@ -15,11 +15,12 @@ export default class Login extends React.Component {
         //document.cookie = 'ku=ku'
         const data = await UserApi.login(this.state.email, this.state.password)
         // this.props.getToken(data)
-        //document.cookie = 'token=' + data + '; SameSite=Strict; secure'  //Secure; HttpOnly'
-        document.cookie = 'token=data; {SameSite=None, HttpOnly}'  //Secure; HttpOnly'
+        
+        //document.cookie = 'token=' + data + ';SameSite=Strict; Secure' //; HttpOnly' //; HttpOnly'
+        //document.cookie = 'token=data; {SameSite=None, HttpOnly}'  //Secure; HttpOnly'
         
         //console.log(data)
-        window.location.pathname = '/User'
+        //window.location.pathname = '/User'
         // if(data !== ''){
             
         // }
