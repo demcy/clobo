@@ -5,22 +5,22 @@ import { UserApi } from '../services/UserApi';
 
 interface IProps {
     users?: IUser[],
-    
+
 }
 interface IState {
     users: IUser[],
-    
+
 }
 
 export default class User extends React.Component<IProps> {
 
     state: IState = {
         users: [],
-        
+
     }
 
     async componentDidMount() {
-        
+
         const data = await UserApi.getAll();
         console.log(data)
         this.setState({ users: data })
@@ -33,10 +33,11 @@ export default class User extends React.Component<IProps> {
                 <tbody>
                     {this.state.users.map(user => (
                         <tr key={user.email}>
-                            <td style={{ width: '90%', paddingLeft: '5%' }}>
-                                <td> {user.email}</td >
-                            </td>
-                            <td style={{ textAlign: 'center' }}>{user.password}</td>
+
+                            <td> {user.email}</td >
+
+                            <td >{user.password}</td>
+                            <td >{user.isConfirmed}</td>
                         </tr>
                     ))}
                 </tbody>

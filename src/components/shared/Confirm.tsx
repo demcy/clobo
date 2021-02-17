@@ -6,8 +6,13 @@ export default class Confirm extends React.Component {
         password: ''
     }
     async componentDidMount(){
-        const data = await UserApi.confirm()
-        console.log(window.location.search)
+        const confirmURL = new URL(window.location.href);
+        
+        if(confirmURL.searchParams.has('email') && confirmURL.searchParams.has('token')){
+            const data = await UserApi.confirm(confirmURL.searchParams.get('email')!,confirmURL.searchParams.get('token')!)
+        }
+        
+        console.log(window.location.href)
         const params = new URLSearchParams(window.location.search);
         console.log(params.get('token'))
         this.setState({email: params.get('token')})
@@ -18,6 +23,7 @@ export default class Confirm extends React.Component {
                 <h1>Register confirmation</h1>
                 <p>Please check your email to confirm your account.</p>
                 <p>{this.state.email}</p>
+               
             </div>
         )
     }
