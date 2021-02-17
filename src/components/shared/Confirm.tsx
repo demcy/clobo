@@ -3,7 +3,7 @@ import { UserApi } from '../../services/UserApi';
 export default class Confirm extends React.Component {
     state = {
         email: 'la',
-        password: ''
+        password: 'la'
     }
     async componentDidMount(){
         const confirmURL = new URL(window.location.href);
