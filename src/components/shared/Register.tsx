@@ -11,7 +11,7 @@ export default class Register extends React.Component {
         event.preventDefault();
         const data = await UserApi.register(this.state.email, this.state.password)
         if(data === 'success'){
-            window.location.pathname = '/Login'
+            window.location.pathname = '/Confirm'
         }
         
     }

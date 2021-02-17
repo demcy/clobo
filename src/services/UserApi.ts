@@ -5,6 +5,7 @@ export abstract class UserApi {
     private static axios = Axios.create(
         {
             baseURL: 'http://localhost:4000',
+            //baseURL: 'https://clobo-backend.vercel.app',
             headers: {
                 common: {
                     'Content-Type': 'application/x-www-form-urlencoded'
@@ -39,6 +40,23 @@ export abstract class UserApi {
         this.axios.defaults.method = 'POST'
         try{
             const response = await this.axios.post<string>(url, JSON.stringify({email, password}));
+            console.log('get all response', response);
+            if (response.status === 201) {
+                return response.data;
+            }
+            return 'trying';
+        }
+        catch (error) {
+            console.log('error', (error as Error).message);
+            return error;
+        }
+    }
+
+    static async confirm(): Promise<string>{
+        const url = '/confirm';
+        this.axios.defaults.method = 'POST'
+        try{
+            const response = await this.axios.post<string>(url, {withCredentials:true});
             console.log('get all response', response);
             if (response.status === 201) {
                 return response.data;
