@@ -4,7 +4,7 @@ import { IUser } from '../domain/IUser';
 export abstract class UserApi {
     private static axios = Axios.create(
         {
-            baseURL: 'http://localhost:4000',
+            baseURL: 'https://localhost:4000',
             //baseURL: 'https://clobo-backend.vercel.app',
             headers: {
                 common: {
@@ -64,11 +64,10 @@ export abstract class UserApi {
             return 'Error confirming your email.';
         }
         catch (error) {
-            //console.log(error)
-            if(error.message === 'Request failed with status code 403'){
+            if( error.response.status === 403){
                 return 'Error confirming your email.'
             }
-            if(error.message === 'Request failed with status code 401'){
+            if(error.response.status === 401){
                 return 'Email confirmation link is expired';
             }
             //console.log('error', (error as Error).message);

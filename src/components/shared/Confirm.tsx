@@ -23,7 +23,7 @@ export default class Confirm extends React.Component {
                 {this.state.post
                     ? <>
                         <p>{this.state.message}</p>
-                        <strong>You should register again</strong>
+                        <strong>Please check your email to confirm your account.</strong>
                     </>
                     : <p>Please check your email to confirm your account.</p>}
             </div>
