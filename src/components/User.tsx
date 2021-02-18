@@ -37,7 +37,7 @@ export default class User extends React.Component<IProps> {
                             <td> {user.email}</td >
 
                             <td >{user.password}</td>
-                            <td >{user.isConfirmed}</td>
+                            <td >{user.isConfirmed.toString()}</td>
                         </tr>
                     ))}
                 </tbody>

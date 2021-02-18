@@ -4,8 +4,8 @@ import { IUser } from '../domain/IUser';
 export abstract class UserApi {
     private static axios = Axios.create(
         {
-            //baseURL: 'http://localhost:4000',
-            baseURL: 'https://clobo-backend.vercel.app',
+            baseURL: 'http://localhost:4000',
+            //baseURL: 'https://clobo-backend.vercel.app',
             headers: {
                 common: {
                     'Content-Type': 'application/x-www-form-urlencoded'
@@ -52,20 +52,30 @@ export abstract class UserApi {
         }
     }
 
-    static async confirm(email:string, token: string): Promise<string>{
+    static async confirm(token: string): Promise<string>{
         const url = '/confirm';
         this.axios.defaults.method = 'POST'
         try{
-            const response = await this.axios.post<string>(url, JSON.stringify({email, token}));
+            const response = await this.axios.post<string>(url, JSON.stringify({token}));
             console.log('get all response', response);
-            if (response.status === 201) {
-                return response.data;
+            if (response.status === 200) {
+                return 'Thank you for confirming your email.';
             }
-            return 'trying';
+            return 'Error confirming your email.';
         }
         catch (error) {
-            console.log('error', (error as Error).message);
-            return error;
+            //console.log(error)
+            if(error.message === 'Request failed with status code 403'){
+                return 'Error confirming your email.'
+            }
+            if(error.message === 'Request failed with status code 401'){
+                return 'Email confirmation link is expired';
+            }
+            //console.log('error', (error as Error).message);
+            // if (response.status === 401) {
+            //     return 'Email Confirmation link is expired';
+            // }
+            return error.message;
         }
     }
 
