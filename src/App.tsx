@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import User from './components/User';
 import Header from './components/shared/Header';
 import Login from './components/shared/Login';
