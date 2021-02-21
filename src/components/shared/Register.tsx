@@ -5,19 +5,22 @@ import { UserApi } from '../../services/UserApi';
 export default class Register extends React.Component {
     state = {
         email: '',
-        password: ''
+        password: '',
+        validate: ''
     }
     async submitHandler(event: any){
         event.preventDefault();
-        const data = await UserApi.register(this.state.email, this.state.password)
-        if(data === 'success'){
+        const message = await UserApi.register(this.state.email, this.state.password)
+        if(message === 'User created a new account with password'){
             window.location.pathname = '/Confirm'
         }
-        
+        if(message === 'User email is already in use'){
+            this.setState({validate: message})
+        }
     }
     
     emailHandler = (event: any) => {
-        this.setState({ email: event.target.value });
+        this.setState({ email: event.target.value, validate: '' });
         //console.log(this.state.email)
         //console.log( event.target.value)
     }
@@ -30,13 +33,14 @@ export default class Register extends React.Component {
         return (
             <div className="container">
                 <h1>Register form</h1>
+                <p>{this.state.validate}</p>
                 <form onSubmit={this.submitHandler.bind(this)}>
                     <div className="row">
                         <div className="col-25">
                             <label htmlFor="email">Email</label>
                         </div>
                         <div className="col-75">
-                            <input onChange={this.emailHandler} type="text" id="email" name="email" placeholder="Your email.." />
+                            <input onChange={this.emailHandler} type="email" id="email" name="email" placeholder="Your email.." autoFocus autoComplete="on" />
                         </div>
                     </div>
                     <div className="row">
@@ -44,7 +48,7 @@ export default class Register extends React.Component {
                             <label htmlFor="password">Password</label>
                         </div>
                         <div className="col-75">
-                            <input onChange={this.passHandler} type="password" id="password" name="password" placeholder="Your password.." />
+                            <input onChange={this.passHandler} type="password" minLength={6} pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W)(?!.*\s).+$" title="Password must contain at least 6 characters, including upper, lowercase, numbers and symbols" id="password" name="password" placeholder="Your password.." />
                         </div>
                     </div>
                     <div className="row">

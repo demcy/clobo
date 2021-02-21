@@ -44,11 +44,13 @@ export abstract class UserApi {
             if (response.status === 201) {
                 return response.data;
             }
-            return 'trying';
+            return 'Error registering your email';
         }
         catch (error) {
-            console.log('error', (error as Error).message);
-            return error;
+            if( error.response.status === 409){
+                return 'User email is already in use'
+            }
+            return error.message;
         }
     }
 
@@ -59,13 +61,13 @@ export abstract class UserApi {
             const response = await this.axios.post<string>(url, JSON.stringify({token}));
             console.log('get all response', response);
             if (response.status === 200) {
-                return 'Thank you for confirming your email.';
+                return 'Thank you for confirming your email';
             }
-            return 'Error confirming your email.';
+            return 'Error confirming your email';
         }
         catch (error) {
             if( error.response.status === 403){
-                return 'Error confirming your email.'
+                return 'Error confirming your email'
             }
             if(error.response.status === 401){
                 return 'Email confirmation link is expired';
