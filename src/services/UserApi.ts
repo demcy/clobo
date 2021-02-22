@@ -48,7 +48,7 @@ export abstract class UserApi {
         }
         catch (error) {
             if( error.response.status === 409){
-                return 'User email is already in use'
+                return error.response.data
             }
             return error.message;
         }
@@ -70,12 +70,9 @@ export abstract class UserApi {
                 return 'Error confirming your email'
             }
             if(error.response.status === 401){
-                return 'Email confirmation link is expired';
+                console.log(error.response.data)
+                return error.response.data
             }
-            //console.log('error', (error as Error).message);
-            // if (response.status === 401) {
-            //     return 'Email Confirmation link is expired';
-            // }
             return error.message;
         }
     }

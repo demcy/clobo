@@ -1,18 +1,14 @@
 import React from 'react';
 import { UserApi } from '../../services/UserApi';
 
-// interface IProps {
-//     getToken: any
-// }
-
 export default class Login extends React.Component {
     state = {
         email: '',
-        password: ''
+        password: '',
+        validate: ''
     }
     async submitHandler(event: any){
         event.preventDefault();
-        //document.cookie = 'ku=ku'
         const data = await UserApi.login(this.state.email, this.state.password)
         // this.props.getToken(data)
         
@@ -39,6 +35,7 @@ export default class Login extends React.Component {
         return (
             <div className="container">
                 <h1>Login form</h1>
+                <p>{this.state.validate}</p>
                 <form onSubmit={this.submitHandler.bind(this)}>
                     <div className="row">
                         <div className="col-25">

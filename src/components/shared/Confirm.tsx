@@ -9,23 +9,18 @@ export default class Confirm extends React.Component {
         const confirmURL = new URL(window.location.href);
         if (confirmURL.searchParams.has('token')) {
             const message = await UserApi.confirm(confirmURL.searchParams.get('token')!)
-            //console.log('ddddddddddddddd' + message)
-            //this.setState({ post: true, message })
+            console.log(message)
             this.setState({ post: true, message })
-            //console.log('dsfsdfsdfsfsfsfsdddddddddddddddddddddddddd')
+            
         }
     }
     render() {
         return (
-
             <div className="container">
                 <h1>Register confirmation</h1>
                 {this.state.post
-                    ? <>
-                        <p>{this.state.message}</p>
-                        <strong>Please check your email to confirm your account.</strong>
-                    </>
-                    : <p>Please check your email to confirm your account.</p>}
+                    ? <p>{this.state.message}</p>
+                    : <p>Please check your email to confirm your account</p>}
             </div>
         )
     }
