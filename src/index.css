@@ -44,7 +44,7 @@ main {
   box-sizing: border-box;
 }
 
-input[type=email], input[type=password], select, textarea {
+input[type=email], input[type=password], input[type=text], select, textarea {
   width: 100%;
   padding: 12px;
   border: 1px solid #ccc;
@@ -83,6 +83,18 @@ input[type=submit]:hover {
 .col-25 {
   float: left;
   width: 25%;
+  margin-top: 6px;
+}
+
+.col-50 {
+  float: left;
+  width: 50%;
+  margin-top: 6px;
+}
+
+.col-50.right{
+  float: right;
+  width: 50%;
   margin-top: 6px;
 }
 

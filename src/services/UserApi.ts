@@ -85,11 +85,11 @@ export abstract class UserApi {
             if (response.status === 200) {
                 return response.data;
             }
-            return 'trying';
+            return 'Error logining into your account'
         }
         catch (error) {
-            console.log('error', (error as Error).message);
-            return error;
+            //console.log(error.response.data)
+            return error.response.data
         }
     }
 

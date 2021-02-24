@@ -5,20 +5,29 @@ export default class Login extends React.Component {
     state = {
         email: '',
         password: '',
-        validate: ''
+        validate: '',
+        action: false,
+        forget: false
     }
-    async submitHandler(event: any){
+    async submitHandler(event: any) {
         event.preventDefault();
-        const data = await UserApi.login(this.state.email, this.state.password)
+        const message = await UserApi.login(this.state.email, this.state.password)
+        this.setState({ validate: message })
+        if (message === 'Please check your email to confirm your account') {
+            this.setState({ action: true })
+        }
+        if (message === 'Your password is incorrect') {
+            this.setState({ action: true, forget: true })
+        }
         // this.props.getToken(data)
-        
+
         //document.cookie = 'token=' + data + ';SameSite=Strict; Secure' //; HttpOnly' //; HttpOnly'
         //document.cookie = 'token=data; {SameSite=None, HttpOnly}'  //Secure; HttpOnly'
-        
+
         //console.log(data)
         //window.location.pathname = '/User'
         // if(data !== ''){
-            
+
         // }
     }
     emailHandler = (event: any) => {
@@ -54,7 +63,16 @@ export default class Login extends React.Component {
                         </div>
                     </div>
                     <div className="row">
-                        <input type="submit" value="Submit" />
+                        {this.state.action
+                            ? <div className="col-50">
+                                {this.state.forget
+                                ? <input type="submit" value="Reset password" />
+                                : <input type="submit" value="Send me again" />}
+                            </div>
+                            : null}
+                        <div className="col-50 right">
+                            <input type="submit" value="Submit" />
+                        </div>
                     </div>
                 </form>
             </div >
